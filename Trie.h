@@ -1,0 +1,33 @@
+//
+// Created by Ethan Wilen on 11/3/25.
+//
+
+#ifndef MUSICSEARCHPROJECT_TRIE_H
+#define MUSICSEARCHPROJECT_TRIE_H
+
+#include <string>
+#include <vector>
+#include "Song.h"
+
+using namespace std;
+class Trie {
+    public:
+        Trie();
+        ~Trie();
+        void insert(const Song* song);
+        bool containsExact(string& songName);
+
+    private:
+        struct Node {
+            bool isEnd;
+            Node* child[128];
+            Node() : isEnd(false) {
+                for (auto &c : child) c = nullptr;
+            }
+        };
+        Node* root;
+        static string normalize(const string& s);   // lowercase
+        static void freeNode(Node* node);
+};
+
+#endif //MUSICSEARCHPROJECT_TRIE_H
