@@ -11,11 +11,12 @@ class Song {
 private:
     string name;
     string artist;
+    string genre;
 
 public:
     // Constructor
-    Song(const string& songName, const string& songArtist)
-        : name(songName), artist(songArtist) {}
+    Song(const string& songName, const string& songArtist, const string& songGenre)
+        : name(songName), artist(songArtist), genre(songGenre) {}
 
     // Getter for name
     string getName() const {
@@ -27,6 +28,11 @@ public:
         return artist;
     }
 
+    // Getter for genre
+    string getGenre() const {
+        return genre;
+    }
+
     // Setter for name
     void setName(const string& newName) {
         name = newName;
@@ -34,6 +40,11 @@ public:
     // Setter for artist
     void setArtist(const string& newArtist) {
         artist = newArtist;
+    }
+
+    // Setter for genre
+    void setArtist(const string& newGenre) {
+        genre = newGenre;
     }
 
     // Display function
