@@ -16,10 +16,10 @@ private:
     size_t HashFunction(const string& key) const;
 
 public:
-    HashTable(size_t size = 211);
+    HashTable(size_t size = 87803);
     void insert(const Song& song);
     bool remove(const string& name);
-    Song* searchName(const string& name);
+    vector<Song*> searchName(const string& name);
     vector<Song*> searchArtist(const string& name);
     vector<Song*> searchGenre(const string& name);
     void display() const;
