@@ -32,7 +32,7 @@ public:
     string getGenre() const {
         return genre;
     }
-
+/*
     // Setter for name
     void setName(const string& newName) {
         name = newName;
@@ -43,13 +43,19 @@ public:
     }
 
     // Setter for genre
-    void setArtist(const string& newGenre) {
+    void setGenre(const string& newGenre) {
         genre = newGenre;
+    }
+    */
+
+    //Overload == operator to compare songs against themselves
+    bool operator==(const Song& other) const {
+        return name == other.name && artist == other.artist;
     }
 
     // Display function
     void display() const {
-        cout << "Song: " << name << " by " << artist << endl;
+        cout << "Song: " << name << " by " << artist << " [" << genre << "]" << endl;
     }
 };
 
