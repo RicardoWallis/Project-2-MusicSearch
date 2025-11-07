@@ -19,7 +19,18 @@ size_t HashTable::HashFunction(const string& key) const {
 //Insert a song by name
 void HashTable::insert(const Song& song) {
     size_t index = HashFunction(song.getName());
-    table[index].push_back(song);
+    bool dupe = false;
+    for (const auto& song_ : table[index]) {
+        if (song_ == song) {
+            //cout << "Duplicate found" << endl;
+            dupe = true;
+            break;
+        }
+    }
+    if (!dupe) {
+        //cout << "Inserting: " << song.getName() << " by " << song.getArtist() << endl;
+        table[index].push_back(song);
+    }
 }
 //Remove song by name
 bool HashTable::remove(const string& name) {
@@ -33,16 +44,18 @@ bool HashTable::remove(const string& name) {
     }
     return false;
 }
-// Search for a song with a specific name
-Song* HashTable::searchName(const string& name) {
+//Search for all songs with a specific name
+vector<Song*> HashTable::searchName(const std::string& name) {
+    std::vector<Song*> results;
     size_t index = HashFunction(name);
     for (auto& song : table[index]) {
         if (song.getName() == name) {
-            return &song;
+            results.push_back(&song);
         }
     }
-    return nullptr;
+    return results;
 }
+
 // Search for all songs by a specific artist
 vector<Song*> HashTable::searchArtist(const string& artist) {
     vector<Song*> songs;
@@ -60,7 +73,7 @@ vector<Song*> HashTable::searchGenre(const string& genre) {
     vector<Song*> songs;
     for (auto& bucket : table) {
         for (auto& song : bucket) {
-            if (song.getArtist() == genre) {
+            if (song.getGenre() == genre) {
                 songs.push_back(&song);
             }
         }
